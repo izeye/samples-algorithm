@@ -1,0 +1,34 @@
+buildscript {
+    repositories {
+        mavenLocal()
+        jcenter()
+        maven { url 'http://repo.spring.io/plugins-release' }
+    }
+
+    dependencies {
+        classpath("org.springframework.build.gradle:propdeps-plugin:$propdepsPluginVersion")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'propdeps'
+
+sourceCompatibility = 1.8
+
+repositories {
+    jcenter()
+
+    mavenLocal()
+}
+
+dependencies {
+    provided("org.projectlombok:lombok:$lombokVersion")
+
+    testCompile("org.assertj:assertj-core:$assertJVersion")
+    testCompile("junit:junit:$jUnitVersion")
+    testCompile("org.mockito:mockito-core:${mockitoVersion}")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.14.1'
+}
